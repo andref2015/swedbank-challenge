@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swedbank Loan Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="#FF5F00"/>
+          <path d="M8 16a8 8 0 0116 0" stroke="#fff" stroke-width="2.5" fill="none"/>
+          <circle cx="16" cy="16" r="3" fill="#fff"/>
+        </svg>
+        <span>Swedbank</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Intro -->
+      <section id="intro" class="screen active">
+        <div class="card card--intro">
+          <h1>Personal Loan Application</h1>
+          <p>Apply for a personal loan in just a few simple steps. Our quick application process will guide you through employment details, income verification, and loan calculation.</p>
+          <button id="btn-start" class="btn btn--primary btn--lg">Start application</button>
+        </div>
+      </section>
+
+      <!-- Progress bar -->
+      <div id="progress" class="progress" hidden>
+        <div class="progress__steps">
+          <div class="progress__step" data-step="1"><span>1</span> Employment</div>
+          <div class="progress__step" data-step="2"><span>2</span> Income & Loan</div>
+          <div class="progress__step" data-step="3"><span>3</span> Consents</div>
+          <div class="progress__step" data-step="4"><span>4</span> Details</div>
+        </div>
+        <div class="progress__bar"><div class="progress__fill"></div></div>
+      </div>
+
+      <!-- Step 1 – Employment -->
+      <section id="step-1" class="screen">
+        <div class="card">
+          <h2>Employment Status</h2>
+          <p class="card__subtitle">Please select your current employment status.</p>
+          <fieldset class="radio-group" id="employment-group">
+            <legend class="sr-only">Employment status</legend>
+            <label class="radio-card">
+              <input type="radio" name="employment" value="employed">
+              <div class="radio-card__body">
+                <div class="radio-card__indicator"></div>
+                <div>
+                  <strong>Employed</strong>
+                  <span>Working for an employer</span>
+                </div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="employment" value="self-employed">
+              <div class="radio-card__body">
+                <div class="radio-card__indicator"></div>
+                <div>
+                  <strong>Self-employed</strong>
+                  <span>Running your own business</span>
+                </div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="employment" value="unemployed">
+              <div class="radio-card__body">
+                <div class="radio-card__indicator"></div>
+                <div>
+                  <strong>Unemployed</strong>
+                  <span>Currently not working</span>
+                </div>
+              </div>
+            </label>
+          </fieldset>
+          <p id="error-employment" class="error" hidden>Please select your employment status.</p>
+          <div class="card__actions">
+            <button class="btn btn--secondary" data-nav="back">Back</button>
+            <button class="btn btn--primary" data-nav="next">Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 – Income & Loan -->
+      <section id="step-2" class="screen">
+        <div class="card">
+          <h2>Income &amp; Loan Details</h2>
+          <p class="card__subtitle">Tell us about your income and desired loan.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="income">Monthly income</label>
+              <select id="income">
+                <option value="">Select income range</option>
+                <option value="<1000">Less than 1 000 €</option>
+                <option value="1000-2000">1 000 – 2 000 €</option>
+                <option value=">2000">More than 2 000 €</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="interest-rate">Interest rate</label>
+              <select id="interest-rate">
+                <option value="3.5">3.5 %</option>
+                <option value="5.5" selected>5.5 %</option>
+                <option value="7.5">7.5 %</option>
+                <option value="9.9">9.9 %</option>
+              </select>
+            </div>
+
+            <div class="field field--full">
+              <label for="loan-amount">Loan amount: <output id="loan-amount-display">5 000 €</output></label>
+              <input type="range" id="loan-amount" min="500" max="30000" step="100" value="5000">
+              <div class="range-labels">
+                <span>500 €</span>
+                <span>30 000 €</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="loan-period">Loan period</label>
+              <select id="loan-period">
+                <option value="12">12 months</option>
+                <option value="24" selected>24 months</option>
+                <option value="36">36 months</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="payment-result">
+            <div class="payment-result__label">Estimated monthly payment</div>
+            <div class="payment-result__value" id="monthly-payment">—</div>
+          </div>
+
+          <p id="error-income" class="error" hidden>Please select your income range.</p>
+          <div class="card__actions">
+            <button class="btn btn--secondary" data-nav="back">Back</button>
+            <button class="btn btn--primary" data-nav="next">Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 – Consents -->
+      <section id="step-3" class="screen">
+        <div class="card">
+          <h2>Consents</h2>
+          <p class="card__subtitle">Please review and accept the following.</p>
+
+          <div class="checkbox-group">
+            <label class="checkbox-card">
+              <input type="checkbox" id="consent-terms" value="terms">
+              <div class="checkbox-card__body">
+                <div class="checkbox-card__indicator"></div>
+                <div>
+                  <strong>Terms and Conditions</strong>
+                  <span>I agree to the loan terms and conditions <em>(required)</em></span>
+                </div>
+              </div>
+            </label>
+            <label class="checkbox-card">
+              <input type="checkbox" id="consent-data" value="data-processing">
+              <div class="checkbox-card__body">
+                <div class="checkbox-card__indicator"></div>
+                <div>
+                  <strong>Data Processing</strong>
+                  <span>I consent to processing of my personal data</span>
+                </div>
+              </div>
+            </label>
+            <label class="checkbox-card">
+              <input type="checkbox" id="consent-marketing" value="marketing">
+              <div class="checkbox-card__body">
+                <div class="checkbox-card__indicator"></div>
+                <div>
+                  <strong>Marketing Communications</strong>
+                  <span>I wish to receive offers and news</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <p id="error-consents" class="error" hidden>You must accept the Terms and Conditions to continue.</p>
+          <div class="card__actions">
+            <button class="btn btn--secondary" data-nav="back">Back</button>
+            <button class="btn btn--primary" data-nav="next">Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 – Additional info -->
+      <section id="step-4" class="screen">
+        <div class="card">
+          <h2>Additional Information</h2>
+          <p class="card__subtitle">Please provide any extra details about your application.</p>
+
+          <div class="field">
+            <label for="additional-info">Your message</label>
+            <textarea id="additional-info" rows="5" placeholder="E.g. purpose of the loan, preferred start date, etc."></textarea>
+            <div class="field__hint">Minimum 10 characters (<span id="char-count">0</span> / 10)</div>
+          </div>
+
+          <p id="error-additional" class="error" hidden>Please enter at least 10 characters.</p>
+          <div class="card__actions">
+            <button class="btn btn--secondary" data-nav="back">Back</button>
+            <button class="btn btn--primary" data-nav="next">Review application</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section id="summary" class="screen">
+        <div class="card">
+          <h2>Application Summary</h2>
+          <p class="card__subtitle">Please review your details before submitting.</p>
+
+          <dl class="summary-list" id="summary-list"></dl>
+
+          <div class="card__actions card__actions--center">
+            <button class="btn btn--secondary" data-nav="back">Edit application</button>
+            <button class="btn btn--primary btn--lg" id="btn-submit">Submit application</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Confirmation -->
+      <section id="confirmation" class="screen">
+        <div class="card card--intro">
+          <div class="confirmation-icon" aria-hidden="true">✓</div>
+          <h2>Application Submitted</h2>
+          <p>Thank you! Your loan application has been received. We will review it and get back to you shortly.</p>
+          <button class="btn btn--primary btn--lg" id="btn-restart">Start new application</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 Swedbank Loan Application Demo</p>
+    </footer>
+  </div>
+
+  <script src="calculator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
