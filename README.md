@@ -7,13 +7,8 @@ A multi-step loan application wizard with a built-in payment calculator, built w
 No build tools or dependencies required. Simply open `index.html` in a modern browser (Chrome or Firefox).
 
 ```bash
-# Option 1: Open directly
+# Open directly
 open index.html
-
-# Option 2: Use a local server (optional, for development)
-npx serve .
-# or
-python3 -m http.server 8000
 ```
 
 ## Structure
